@@ -1,0 +1,176 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>RegFit - Search Exercise</title>
+  <link rel="icon" type="image/x-icon" th:href="@{images/iconregina.png}">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!--  Google Fonts -->
+  <link rel="stylesheet" type="text/css " th:href="@{/css/style.css}">
+  <link
+    th:href="@{'https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital@0;1&family=Outfit:wght@100..900&family=Snippet&display=swap'}"
+    rel="stylesheet">
+</head>
+<br>
+
+<body th:style="'background-color: #f3e3f1; border: 19px solid #f3e3f1;'">
+
+  <!---------------------------------------------------------------- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="/home">
+      <img th:src="@{/images/mainlogo.png}" width="200" height="100" alt="RegFit Logo">
+    </a>
+
+    <!-- nav bar for mobiles -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Cardio tracker
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/new">Add Cardio</a>
+              <a class="dropdown-item" href="/activities">Your Cardio</a>
+          </div>
+      </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Workout Planner
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/workout">Exercises</a>
+            <a class="dropdown-item" href="/workoutlist">Personalized Workout</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Cycle Synch
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/periodForm">Cycle Log</a>
+            <a class="dropdown-item" href="/periodPhases">Cycle Map</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- BUTTONS AUTHENTICATION -->
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <a href="/logout" class="btn btn-secondary custom-btn">Logout</a>
+    </div>
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+
+      <a href="/login" class="btn btn-secondary custom-btn">Log In</a>
+      <a href="/register" class="btn btn-secondary custom-btn">Register</a>
+    </div>
+  </nav>
+
+  <!-- ..............here ends navbar config................... -->
+    <!-- Image inserted here -->
+    <div class="container mt-5">
+        <img src="/images/workout.png" alt="workout" class="img-fluid">
+    </div>
+
+    <!-- Exercises Display -->
+    <div th:if="${exercises}">
+        <div class="container mt-5">
+            <h1 class="text-center mb-4">Search for Exercises</h1>
+
+            <!-- Search Form -->
+            <form action="/workout" method="get" class="mb-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="primaryMuscle" name="primaryMuscle"
+                        placeholder="Enter muscle (chest, lats, hamstrings, glutes, shoulders, etc)">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+
+            <!-- Cards Display -->
+            <div class="row">
+                <div th:each="exercise : ${exercises}" class="col-sm-6">
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${exercise.name}">Special title treatment</h5>
+                            <p class="card-text">
+                                <strong>Category:</strong> <span th:text="${exercise.category}"></span><br>
+                                <strong>Equipment:</strong> <span th:text="${exercise.equipment}"></span><br>
+                                <strong>Level:</strong> <span th:text="${exercise.level}"></span>
+                            </p>
+                            <div th:if="${exercise.instructions}">
+                                <h6>Instructions:</h6>
+                                <ol>
+                                    <li th:each="instruction : ${exercise.instructions}" th:text="${instruction}">
+                                    </li>
+                                </ol>
+                            </div>
+                            <p><strong>Primary Muscles:</strong>
+                                <span th:each="muscle : ${exercise.primaryMuscles}" th:text="${muscle} + ' '"></span>
+                            </p>
+                            <p><strong>Secondary Muscles:</strong>
+                                <span th:each="muscle : ${exercise.secondaryMuscles}" th:text="${muscle} + ' '"></span>
+                            </p>
+
+                            <input type="hidden" name="exerciseId" th:value="${exercise.id}" />
+                            <input type="hidden" name="exerciseName" th:value="${exercise.name}" />
+
+                            <!-- Optional: Add fields for sets and reps if needed -->
+                            <div class="form-group">
+                                <label for="sets">Sets:</label>
+                                <input type="number" class="form-control" name="sets" id="sets" value="3" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reps">Reps:</label>
+                                <input type="number" class="form-control" name="reps" id="reps" value="10" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Add to my workout</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- No exercises available message -->
+    <div th:if="${#lists.isEmpty(exercises)}">
+        <div class="container mt-5">
+            <p class="text-center">Muscle not found, you can try typing: chest, lats, hamstrings, glutes, shoulders,
+                etc.</p>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+<!--------------------------------------------------------- FOOTER STARTS -->
+<footer class="text-center py-3" style="background-color: #f8f9fa;">
+    <div class="container">
+        <p class="mt-2 mb-0">&copy; 2024 RegFit. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<!--------------------------------------------------------- FOOTER ENDS -->
+
+
+<!-- Optional JavaScript -->
+<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js}" defer></script>
+<script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+
+</body>
+
+</html>

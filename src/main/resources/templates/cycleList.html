@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cycle List</title>
+</head>
+<body>
+    <body>
+        <h2>Menstrual Cycles List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cycle ID</th>
+                    <th>Last Period Date</th>
+                    <th>Cycle Length</th>
+                    <th>Period Length</th>
+                    <th>Predicted Next Period</th>
+                    <th>Predicted Ovulation Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cycle : ${cycles}">
+                    <td th:text="${cycle.cycleId}"></td>
+                    <td th:text="${cycle.lastPeriodDate}"></td>
+                    <td th:text="${cycle.cycleLength}"></td>
+                    <td th:text="${cycle.periodLength}"></td>
+                    <td th:text="${cycle.predictedNextPeriodDate}"></td>
+                    <td th:text="${cycle.predictedOvulationDate}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>RegFit - See Activity</title>
+  <link rel="icon" type="image/x-icon" th:href="@{images/iconregina.png}">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!--  Google Fonts -->
+  <link rel="stylesheet" type="text/css " th:href="@{/css/style.css}">
+  <link
+    th:href="@{'https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital@0;1&family=Outfit:wght@100..900&family=Snippet&display=swap'}"
+    rel="stylesheet">
+</head>
+<br>
+
+<body th:style="'background-color: #f3e3f1; border: 19px solid #f3e3f1;'">
+
+  <!---------------------------------------------------------------- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="/home">
+      <img th:src="@{/images/mainlogo.png}" width="200" height="100" alt="RegFit Logo">
+    </a>
+
+    <!-- nav bar for mobiles -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Cardio tracker
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/new">Add Cardio</a>
+              <a class="dropdown-item" href="/activities">Your Cardio</a>
+          </div>
+      </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Workout Planner
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/workout">Exercises</a>
+            <a class="dropdown-item" href="/workoutlist">Personalized Workout</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Cycle Synch
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/periodForm">Cycle Log</a>
+            <a class="dropdown-item" href="/periodPhases">Cycle Map</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- BUTTONS AUTHENTICATION -->
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <a href="/logout" class="btn btn-secondary custom-btn">Logout</a>
+    </div>
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+
+      <a href="/login" class="btn btn-secondary custom-btn">Log In</a>
+      <a href="/register" class="btn btn-secondary custom-btn">Register</a>
+    </div>
+  </nav>
+
+  <!-- ..............here ends navbar config................... -->
+ <br>
+
+
+      
+      <!-- Container with border for framing -->
+      <div class="card-body" style="border: none;">
+      <div class="container" style="border: none; border-radius: 10px; padding: 10px;">
+          <div class="card" style="width: rem;">
+            <!-- -->
+            <img class="card-img-top" src="/images/summary.png" alt="REGINA">
+          <br>
+              <table class="table table-striped">
+              <br>
+              <thead class="table-info">
+                  <tr class="bg-primary">
+                      <th scope="col">#</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Steps</th>
+                      <th scope="col">Distance (km)</th>
+                      <th scope="col">Calories Burned</th>
+                      <th scope="col">Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr class="table-light" th:each="activity, iterStat : ${activities}">
+                      <th scope="row" th:text="${iterStat.index + 1}"></th>
+                      <td th:text="${#dates.format(activity.date, 'yyyy-MM-dd')}"></td>
+                      <td th:text="${activity.steps}"></td>
+                      <td th:text="${activity.distance}"></td>
+                      <td th:text="${activity.caloriesBurned}"></td>
+                      <td>
+                          <!-- EDIT AND DELETE SECTION -->
+                          <a th:href="@{'/activities/' + ${activity.id} + '/edit'}" class="btn btn-outline-info">Edit</a>
+                          <form th:action="@{'/activities/' + ${activity.id} + '/delete'}" method="post" style="display:inline;">
+                              <input type="hidden" name="_method" value="delete" />
+                              <button type="submit" class="btn btn-outline-dark">Delete</button>
+                          </form>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+
+      </div>
+      <br>
+      <img class="card-img-top mx-auto d-block" src="/images/trackingimage.png" alt="subtitle tracking" style="width: 600px; height: 180;">      
+
+    </div>
+  </div>
+  
+  
+  
+<!--------------------------------------------------------- FOOTER STARTS -->
+<footer class="text-center py-3" style="background-color: #f8f9fa;">
+    <div class="container">
+          <p class="mt-2 mb-0">&copy; 2024 RegFit. All Rights Reserved.</p>
+    </div>
+  </footer>
+  
+  <!--------------------------------------------------------- FOOTER ENDS -->
+    <!-- Optional JavaScript -->
+    <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js}" defer></script>
+    <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+
+</body>
+
+</html>

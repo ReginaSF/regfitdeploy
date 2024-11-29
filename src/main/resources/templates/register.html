@@ -1,0 +1,175 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RegFit - Register</title>
+    <link rel="icon" type="i    mage/x-icon" th:href="@{images/iconregina.png}">
+
+    <!-- Cargar Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Vincular la fuente de Google Fonts -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link
+        th:href="@{'https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital@0;1&family=Outfit:wght@100..900&family=Snippet&display=swap'}"
+        rel="stylesheet">
+</head>
+
+<body th:style="'background-color: #f3e3f1; border: 19px solid #f3e3f1;'">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/home">
+            <img th:src="@{/images/mainlogo.png}" width="200" height="100" alt="RegFit Logo">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/activities">Your Cardio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/new">Add Cardio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/workoutPlan">Workout Planner</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/calendar">Calendar Synch</a>
+                </li>
+            </ul>
+
+            <!-- Botones sin autenticaciÃ³n -->
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="/logout" class="btn btn-secondary custom-btn">Logout</a>
+            </div>
+
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="/login" class="btn btn-secondary custom-btn">Log In</a>
+                <a href="/register" class="btn btn-secondary custom-btn">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Formulario de Registro -->
+    <div class="container" style="background-color: #f7d4d8; padding: 10px;">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-6 mx-auto rounded border p-4 bg-white">
+                    <h2 class="text-center mb-4">Join RegFit!</h2>
+                    <hr />
+
+                    <!-- Mensaje de éxito -->
+                    <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert"
+                        id="successAlert">
+                        <strong>Congrats! You're part of RegFit!</strong>
+                        <a class="ms-2" href="/login">Login</a>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Hurray! You are in!"></button>
+                    </div>
+
+
+                    <form th:action="@{/register}" th:object="${registerDTO}" method="post">
+                        <!-- First Name -->
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-4 col-form-label">First Name</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" th:field="*{firstName}">
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-4 col-form-label">Last Name</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" th:field="*{lastName}">
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-4 col-form-label">Email</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" th:field="*{email}">
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-4 col-form-label">Phone</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" th:field="*{phone}">
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-4 col-form-label">Address</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" th:field="*{address}">
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-4 col-form-label">Password</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="password" th:field="*{password}">
+                            </div>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-4 col-form-label">Confirm Password</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="password" th:field="*{confirmPassword}">
+                            </div>
+                        </div>
+
+                        <!-- Role Selection -->
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-4 col-form-label">Select membership:</label>
+                            <div class="col-sm-8">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" th:field="*{role}" type="radio" name="role"
+                                        value="BASIC" required>
+                                    <label class="form-check-label" for="inlineRadio1">Basic</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" th:field="*{role}" type="radio" name="role"
+                                        value="PREMIUM" required>
+                                    <label class="form-check-label" for="inlineRadio2">Premium</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group row mb-3">
+                            <div class="offset-sm-4 col-sm-8">
+                                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-3" style="background-color: #f8f9fa;">
+        <div class="container">
+            <p class="mt-2 mb-0">&copy; 2024 RegFit. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js}" defer></script>
+    <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+</body>
+
+</html>

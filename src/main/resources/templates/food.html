@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Macros</title>
+</head>
+<body>
+    <h1>Food Macros</h1>
+
+    <form method="get" action="/foodmacros">
+        <input type="text" name="query" placeholder="Search for food">
+        <button type="submit">Search</button>
+    </form>
+
+    <div>
+        <h2>Food Results:</h2>
+        <div th:if="${foodList != null}">
+            <div th:each="food : ${foodList}">
+                <h3 th:text="${food.name}"></h3>
+                <p><strong>Brand:</strong> <span th:text="${food.brand}"></span></p>
+                <p><strong>Serving Size:</strong> <span th:text="${food.servingSize}"></span></p>
+                <p><strong>Calories:</strong> <span th:text="${food.calories}"></span> kcal</p>
+                <p><strong>Fat:</strong> <span th:text="${food.fat}"></span></p>
+                <p><strong>Carbs:</strong> <span th:text="${food.carbs}"></span></p>
+                <p><strong>Protein:</strong> <span th:text="${food.protein}"></span></p>
+            </div>
+        </div>
+        <div th:if="${foodList == null or foodList.isEmpty()}">
+            <p>No results found. Try a different search term.</p>
+        </div>
+    </div>
+
+</body>
+</html>

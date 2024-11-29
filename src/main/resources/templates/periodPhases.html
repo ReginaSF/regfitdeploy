@@ -1,0 +1,197 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>RegFit - Cycle Map</title>
+  <link rel="icon" type="image/x-icon" th:href="@{images/iconregina.png}">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Google Fonts -->
+  <link rel="stylesheet" type="text/css " th:href="@{/css/style.css}">
+  <link th:href="@{'https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital@0;1&family=Outfit:wght@100..900&family=Snippet&display=swap'}"
+    rel="stylesheet">
+</head>
+
+
+
+  <!---------------------------------------------------------------- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="/home">
+      <img th:src="@{/images/mainlogo.png}" width="200" height="100" alt="RegFit Logo">
+    </a>
+
+    <!-- nav bar for mobiles -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Cardio tracker
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/new">Add Cardio</a>
+            <a class="dropdown-item" href="/activities">Your Cardio</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Workout Planner
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/workout">Exercises</a>
+            <a class="dropdown-item" href="/workoutlist">Personalized Workout</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Cycle Synch
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/periodForm">Cycle Log</a>
+            <a class="dropdown-item" href="/periodPhases">Cycle Map</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- BUTTONS AUTHENTICATION -->
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <a href="/logout" class="btn btn-secondary custom-btn">Logout</a>
+    </div>
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <a href="/login" class="btn btn-secondary custom-btn">Log In</a>
+      <a href="/register" class="btn btn-secondary custom-btn">Register</a>
+    </div>
+  </nav>
+
+  <!-- .............. Main content starts here .............. -->
+  <!-- Main Content -->
+  <br>
+  <div class="container mt-5">
+    <img src="/images/cyclemap.png" alt="workout" class="img-fluid">
+
+    <div th:style="'background-color: #f3e3f1; border: 19px solid #f3e3f1;'">
+      <br>
+      <div class="container mt-5 pt-5">
+        <div th:if="${periodData}">
+          <!-- Display period data -->
+          <div class="row">
+            <div class="col-sm">
+              <h5>Ovulation Start</h5>
+              <p th:text="${periodData.ovulationStart}"></p>
+            </div>
+            <div class="col-sm">
+              <h5>Ovulation Ends</h5>
+              <p th:text="${periodData.ovulationEnd}"></p>
+            </div>
+            <div class="col-sm">
+              <h5>Luteal Phase Start</h5>
+              <p th:text="${periodData.lutealPhaseStart}"></p>
+            </div>
+            <div class="col-sm">
+              <h5>Luteal Phase End</h5>
+              <p th:text="${periodData.lutealPhaseEnd}"></p>
+            </div>
+          </div>
+
+          <!-- Buttons for editing and deleting the period data -->
+          <div class="mt-4">
+            <a th:href="@{/editPeriodData/{id}(id=${periodData.periodId})}" class="btn btn-primary">Edit</a>
+            <a th:href="@{/deletePeriodData/{id}(id=${periodData.periodId})}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a>
+          </div>
+        </div>
+        <div class="container my-5" style="background-color: white;">
+          <div class="row justify-content-center">
+            <!-- First Card -->
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="card" style="width: 100%;">
+                <img class="card-img-top" src="/images/men.png" alt="phase 1" style="object-fit: cover; width: 100%; height: 200px;">
+                <div class="card-body">
+                  <h5 class="card-title">Days 1-5</h5>
+                  <p class="card-text">Recommended workouts: Low-intensity steady-state cardio & Restorative Yoga or Stretching.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+        
+            <!-- Second Card -->
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="card" style="width: 100%;">
+                <img class="card-img-top" src="/images/follicular.png" alt="phase 2" style="object-fit: cover; width: 100%; height: 200px;">
+                <div class="card-body">
+                  <h5 class="card-title">Days 6-10</h5>
+                  <p class="card-text">Recommended workouts: Strength Training & HIIT.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+        
+            <!-- Third Card -->
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="card" style="width: 100%;">
+                <img class="card-img-top" src="/images/ovulation.png" alt="phase 3" style="object-fit: cover; width: 100%; height: 200px;">
+                <div class="card-body">
+                  <h5 class="card-title">Days 11-14</h5>
+                  <p class="card-text">Recommended workouts: Heavy Lifting & Plyometrics.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+        
+            <!-- Fourth Card -->
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="card" style="width: 100%;">
+                <img class="card-img-top" th:src="@{/images/luteal.png}" alt="phase 4" style="object-fit: cover; width: 100%; height: 200px;">
+                <div class="card-body">
+                  <h5 class="card-title">Days 15-28</h5>
+                  <p class="card-text">Recommended workouts: Moderate Strength & Cardio.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Show "Add Cycle" message if no periodData -->
+        <div th:unless="${periodData}">
+          <p>No period data found for your account.</p>
+          <p>Go to <a href="/periodForm">Add Cycle</a> to start.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- .............. Main content ends here .............. -->
+
+
+
+
+
+  </body>
+  <!-- .............. Main content ends here .............. -->
+
+  <!--------------------------------------------------------- FOOTER STARTS -->
+  <footer class="text-center py-3" style="background-color: #f8f9fa;">
+    <div class="container">
+        <p class="mt-2 mb-0">&copy; 2024 RegFit. All Rights Reserved.</p>
+    </div>
+</footer>
+  <!--------------------------------------------------------- FOOTER ENDS -->
+
+  <!-- Optional JavaScript -->
+  <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js}" defer></script>
+  <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+
+</body>
+
+</html>

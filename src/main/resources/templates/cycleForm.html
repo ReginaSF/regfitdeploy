@@ -1,0 +1,96 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RegFit - Cycle Synch</title>
+    <link rel="icon" type="image/x-icon" th:href="@{images/iconregina.png}">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link th:href="@{'https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital@0;1&family=Outfit:wght@100..900&family=Snippet&display=swap'}" rel="stylesheet">
+</head>
+
+<body th:style="'background-color: #f3e3f1; border: 19px solid #f3e3f1;'">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/home">
+            <img th:src="@{/images/mainlogo.png}" width="200" height="100" alt="RegFit Logo">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/activities">Your Cardio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/new">Add Cardio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Workout Planner
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/workout">Exercises</a>
+                        <a class="dropdown-item" href="/workoutlist">Personalized Workout</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Cycle Synch
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/cycle/add">Cycle Log</a>
+                        <a class="dropdown-item" href="/cycle/list">Cycle Map</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div th:if="${#authentication.principal == null}">
+            <a href="/login" class="btn btn-secondary custom-btn">Log In</a>
+            <a href="/register" class="btn btn-secondary custom-btn">Register</a>
+        </div>
+        <div th:if="${#authentication.principal != null}">
+            <a href="/logout" class="btn btn-secondary custom-btn">Logout</a>
+        </div>
+    </nav>
+
+    <body>
+        <h2>Add Menstrual Cycle</h2>
+        <form action="/Cycle/save" method="POST">
+            <div>
+                <label for="lastPeriodDate">Last Period Date:</label>
+                <input type="date" id="lastPeriodDate" name="lastPeriodDate" required />
+            </div>
+            <div>
+                <label for="cycleLength">Cycle Length (days):</label>
+                <input type="number" id="cycleLength" name="cycleLength" required />
+            </div>
+            <div>
+                <label for="periodLength">Period Length (days):</label>
+                <input type="number" id="periodLength" name="periodLength" required />
+            </div>
+            <div>
+                <label for="userId">User ID (for association):</label>
+                <input type="number" id="userId" name="userId" required />
+            </div>
+            <button type="submit">Save Menstrual Cycle</button>
+        </form>
+    <!-- Footer -->
+    <footer class="text-center py-3" style="background-color: #f8f9fa;">
+        <div class="container">
+            <p class="mt-2 mb-0">&copy; 2024 RegFit. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js}" defer></script>
+    <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+</body>
+
+</html>
