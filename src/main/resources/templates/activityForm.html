@@ -99,36 +99,40 @@
                             <!-- Card image -->
                             <img class="card-img-top" th:src="@{/images/add.png}" alt="steps">
                             
-                            <!-- Form starts here -->
-                            <form th:action="@{/new}" th:object="${activityDTO}" method="post">
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputDate">Date</label>
-                                        <input type="date" class="form-control" id="inputDate" th:field="*{date}" placeholder="YYYY-MM-DD">
-                                    </div>
-                                </div>
-                
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputSteps">Steps</label>
-                                        <input type="number" class="form-control" id="inputSteps" th:field="*{steps}" placeholder="Steps">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputDistance">Distance (km)</label>
-                                        <input type="number" class="form-control" id="inputDistance" step="0.01" th:field="*{distance}" placeholder="Distance in km">
-                                    </div>
-                                </div>
-                
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputCalories">Calories Burned</label>
-                                        <input type="number" class="form-control" id="inputCalories" th:field="*{caloriesBurned}" placeholder="Calories Burned">
-                                    </div>
-                                </div>
-                
-                                <button type="submit" class="btn btn-outline-success">Save cardio</button>
-                            </form>
-                            <!-- Form ends here -->
+                           <!-- Form starts here -->
+<form th:action="@{${activityDTO.id} != null ? '/activities/' + ${activityDTO.id} + '/edit' : '/new'}" th:object="${activityDTO}" method="post">
+  <div class="form-row">
+      <div class="form-group col-md-6">
+          <label for="inputDate">Date</label>
+          <input type="date" class="form-control" id="inputDate" th:field="*{date}" placeholder="YYYY-MM-DD">
+      </div>
+  </div>
+
+  <div class="form-row">
+      <div class="form-group col-md-6">
+          <label for="inputSteps">Steps</label>
+          <input type="number" class="form-control" id="inputSteps" th:field="*{steps}" placeholder="Steps">
+      </div>
+      <div class="form-group col-md-6">
+          <label for="inputDistance">Distance (km)</label>
+          <input type="number" class="form-control" id="inputDistance" step="0.01" th:field="*{distance}" placeholder="Distance in km">
+      </div>
+  </div>
+
+  <div class="form-row">
+      <div class="form-group col-md-6">
+          <label for="inputCalories">Calories Burned</label>
+          <input type="number" class="form-control" id="inputCalories" th:field="*{caloriesBurned}" placeholder="Calories Burned">
+      </div>
+  </div>
+
+  <!-- Hidden field for ID when editing an existing activity -->
+  <input type="hidden" th:field="*{id}" />
+
+  <button type="submit" class="btn btn-outline-success">Save cardio</button>
+</form>
+<!-- Form ends here -->
+
                         </div>
                     </div>
                 

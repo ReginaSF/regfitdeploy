@@ -80,6 +80,8 @@
                             <label class="col-sm-4 col-form-label">First Name</label>
                             <div class="col-sm-8">
                                 <input class="form-control" th:field="*{firstName}">
+                                <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="text-danger"
+                                th:errors="${registerDTO.firstName}"></p>
                             </div>
                         </div>
 
@@ -87,6 +89,8 @@
                         <div class="form-group row mb-3">
                             <label class="col-sm-4 col-form-label">Last Name</label>
                             <div class="col-sm-8">
+                                <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="text-danger"
+                                th:errors="${registerDTO.lastName}"></p>
                                 <input class="form-control" th:field="*{lastName}">
                             </div>
                         </div>
@@ -96,6 +100,7 @@
                             <label class="col-sm-4 col-form-label">Email</label>
                             <div class="col-sm-8">
                                 <input class="form-control" th:field="*{email}">
+                                <p th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="${registerDTO.email}">
                             </div>
                         </div>
 
@@ -120,6 +125,8 @@
                             <label class="col-sm-4 col-form-label">Password</label>
                             <div class="col-sm-8">
                                 <input class="form-control" type="password" th:field="*{password}">
+                                <p th:if="${#fields.hasErrors('password')}" th:errorclass="text-danger"
+                                th:errors="${registerDTO.password}"></p>
                             </div>
                         </div>
 
@@ -128,6 +135,8 @@
                             <label class="col-sm-4 col-form-label">Confirm Password</label>
                             <div class="col-sm-8">
                                 <input class="form-control" type="password" th:field="*{confirmPassword}">
+                                <p th:if="${#fields.hasErrors('confirmPassword')}" th:errorclass="text-danger"
+                                th:errors="${registerDTO.confirmPassword}"></p>
                             </div>
                         </div>
 
