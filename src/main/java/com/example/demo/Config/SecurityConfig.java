@@ -19,12 +19,13 @@ public class SecurityConfig {
         http
         .authorizeHttpRequests(authorizeRequests ->
             authorizeRequests
-            .requestMatchers("/favicon.ico","/css/**", "/images/**", "/js/**","/register","/home","/error/**", "/login","/logout").permitAll()  // Permite acceso sin autenticación
-            .requestMatchers("/foodmacros/**","/workout/**","/new/**","/activities/**","/workoutlist/**","/calendar/**","/cycle/**").hasAnyRole(  "PREMIUM","BASIC") 
+            .requestMatchers("/saved-workouts","/favicon.ico","/css/**", "/images/**", "/js/**","/register","/home","/error/**", "/login","/logout").permitAll()  // Permite acceso sin autenticación
+            .requestMatchers("/workout/**","/new/**","/activities/**","/workoutlist/**","/calendar/**","/cycle/**").hasAnyRole(  "PREMIUM","BASIC") 
             .requestMatchers("/editPeriodData/**","/deletePeriodData/**", "/periodPhases","/periodForm", "/submitPeriodForm","/submitPeriodData").hasRole("PREMIUM")  // Only accessible by users with role PREMIUM
            )
            .formLogin(form -> form
            .loginPage("/login").permitAll()
+           
            .defaultSuccessUrl("/home", true)  // Redirect to /home after successful login
        )        .logout(withDefaults())  // Configura el logout si lo necesitas
        .csrf(withDefaults()); 

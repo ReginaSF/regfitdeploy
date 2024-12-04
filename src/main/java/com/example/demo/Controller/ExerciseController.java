@@ -81,7 +81,6 @@ if (user == null) {
 }
 
         // Create a new workout for this user with the selected exercise
-        workoutService.createWorkout(user.getId(), List.of(exerciseId), sets, reps);
 
         // Redirect to the workout list page (or any other page)
         return "redirect:/workoutlist";

@@ -1,4 +1,4 @@
-package com.example.demo.Entity;
+/*package com.example.demo.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -74,4 +74,4 @@ public class FoodMacros {
         this.protein = protein;
     }
     
-}
+}*/

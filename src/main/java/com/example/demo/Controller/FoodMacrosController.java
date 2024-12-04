@@ -1,4 +1,4 @@
-package com.example.demo.Controller;
+/*ackage com.example.demo.Controller;
 
 import java.util.List;
 
@@ -34,3 +34,4 @@ public class FoodMacrosController {
         return "food";  
     }
 }
+*/

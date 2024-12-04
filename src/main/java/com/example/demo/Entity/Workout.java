@@ -1,53 +1,39 @@
 package com.example.demo.Entity;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "workoutsfinal")
+@Table(name = "workout2")
 public class Workout {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // This corresponds to the # column in the front-end
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private AppUsers user; // This associates the workout with a specific user
+    private String name;
+    private int totalSets;
+    private int totalReps;
 
-    @ManyToMany
-    @JoinTable(
-        name = "workout_exercise", // name of the join table
-        joinColumns = @JoinColumn(name = "workout_id"), // FK column for Workout
-        inverseJoinColumns = @JoinColumn(name = "exercise_id") // FK column for Exercise
-    )
-    private List<Exercise> exercises; // This associates multiple exercises with a workout
-
-    private LocalDate workoutDate; // Optional: can be used if you want to track the date of the workout
-
-    private Integer sets;  // Number of sets the user performed for the exercise
-    private Integer reps;  // Number of reps the user performed for each set
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Exercise> exercises;
 
     public Workout() {
     }
 
-    public Workout(List<Exercise> exercises, Long id, Integer reps, Integer sets, AppUsers user, LocalDate workoutDate) {
-        this.exercises = exercises;
+    public Workout(Long id, String name, int totalSets, int totalReps, List<Exercise> exercises) {
         this.id = id;
-        this.reps = reps;
-        this.sets = sets;
-        this.user = user;
-        this.workoutDate = workoutDate;
+        this.name = name;
+        this.totalSets = totalSets;
+        this.totalReps = totalReps;
+        this.exercises = exercises;
     }
 
     public Long getId() {
@@ -58,12 +44,28 @@ public class Workout {
         this.id = id;
     }
 
-    public AppUsers getUser() {
-        return user;
+    public String getName() {
+        return name;
     }
 
-    public void setUser(AppUsers user) {
-        this.user = user;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getTotalSets() {
+        return totalSets;
+    }
+
+    public void setTotalSets(int totalSets) {
+        this.totalSets = totalSets;
+    }
+
+    public int getTotalReps() {
+        return totalReps;
+    }
+
+    public void setTotalReps(int totalReps) {
+        this.totalReps = totalReps;
     }
 
     public List<Exercise> getExercises() {
@@ -72,29 +74,6 @@ public class Workout {
 
     public void setExercises(List<Exercise> exercises) {
         this.exercises = exercises;
-    }
-
-    public LocalDate getWorkoutDate() {
-        return workoutDate;
-    }
-
-    public void setWorkoutDate(LocalDate workoutDate) {
-        this.workoutDate = workoutDate;
-    }
-
-    public Integer getSets() {
-        return sets;
-    }
-
-    public void setSets(Integer sets) {
-        this.sets = sets;
-    }
-
-    public Integer getReps() {
-        return reps;
-    }
-
-    public void setReps(Integer reps) {
-        this.reps = reps;
-    }
+    } 
+    
 }

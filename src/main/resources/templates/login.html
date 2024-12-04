@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>RegFit - Login</title>
+    <link rel="icon" type="image/x-icon" th:href="@{images/iconregina.png}">
+
+    <!-- Google Fonts -->
+    <link
+        th:href="@{'https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital@0;1&family=Outfit:wght@100..900&family=Snippet&display=swap'}"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Tailwind (Optional) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
+    </style>
+</head>
+
+<body th:style="'background-color: #f3e3f1; border: 19px solid #f3e3f1;'">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="/home">
+            <img th:src="@{/images/mainlogo.png}" width="200" height="100" alt="RegFit Logo">
+        </a>
+
+        <!-- Navbar for mobile toggle button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!-- Additional nav items here -->
+            </ul>
+        </div>
+
+        <!-- Authentication Buttons -->
+        <a href="/register" class="btn btn-secondary custom-btn">Register</a>
+    </nav>
+
+    <!-- login form starts here----- -->
+
+
+
+    <div class="flex flex-col justify-center lg:px-8 min-h-full px-6 py-12">
+        <div class="mt-5 mx-auto max-w-sm w-full">
+            <form class="bg-white overflow-hidden p-10 rounded-xl shadow-lg space-y-6" th:action="@{/login}"
+                method="post">
+
+                <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+                    <img class="mx-auto h-20 w-auto" th:src="@{/images/image.png}">
+                </div>
+
+                <h4 class="font-bold leading-9 mt-10 text-center text-gray-900 text-xl tracking-tight">Sign in to your
+                    account</h4>
+
+                <div th:if="${param.error}" class="bg-rose-100 justify-center p-4 ring-1 ring-rose-200 rounded-md">
+                    <p>Username and Password Mismatch</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium leading-6 text-gray-900" for="username">Username</label>
+                    <div class="mt-2">
+                        <input
+                            class="ring-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm border-0 ring-inset ring-gray-300 px-3 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            id="username" name="username" type="text" placeholder="Example@gmail.com">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium leading-6 text-gray-900" for="password">Password</label>
+                    <div class="mt-2">
+                        <input
+                            class="ring-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm border-0 ring-inset ring-gray-300 px-3 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            id="password" name="password" type="password" placeholder="Password">
+                    </div>
+                </div>
+
+                <div>
+                    <input
+                        class="bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white flex w-full justify-center rounded-md shadow-sm ring-1 ring-inset hover:bg-indigo-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        type="submit" value="Log in">
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <!--------------------------------------------------------- FOOTER STARTS -->
+    <footer class="text-center py-3" style="background-color: #f8f9fa;">
+        <div class="container">
+            <p class="mt-2 mb-0">&copy; 2024 RegFit. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <!--------------------------------------------------------- FOOTER ENDS -->
+
+
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

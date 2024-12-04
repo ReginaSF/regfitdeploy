@@ -1,3 +1,4 @@
+/*
 package com.example.demo.Service.Activity;
 
 import java.net.URLEncoder;
@@ -99,3 +100,4 @@ public class FoodMacrosService {
         }
     }
 }
+*/

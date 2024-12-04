@@ -134,7 +134,7 @@
                                 <input type="number" class="form-control" name="reps" id="reps" value="10" required>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Add to my workout</button>
+                            <button type="button" class="btn btn-primary" onclick="saveExerciseToLocalStorage('${exercise.id}', '${exercise.name}')">Add to my workout</button>
                             </form>
 
                         </div>
@@ -154,8 +154,30 @@
 
 
     <!-- Bootstrap JS -->
+  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script>
+      // Function to save the exercise to localStorage
+      function saveExerciseToLocalStorage(exerciseId, exerciseName) {
+          // Get the saved exercises from localStorage (if any)
+          let savedExercises = JSON.parse(localStorage.getItem('savedExercises')) || [];
+
+          // Create a new exercise object to save
+          const newExercise = { id: exerciseId, name: exerciseName };
+
+          // Add the new exercise to the saved exercises list
+          savedExercises.push(newExercise);
+
+          // Save the updated list back to localStorage
+          localStorage.setItem('savedExercises', JSON.stringify(savedExercises));
+
+          // Optionally, show a message or update the UI (e.g., notify the user)
+          alert('Exercise added to your workout!');
+      }
+  </script>
+
+
+  </body>
 
 <!--------------------------------------------------------- FOOTER STARTS -->
 <footer class="text-center py-3" style="background-color: #f8f9fa;">
