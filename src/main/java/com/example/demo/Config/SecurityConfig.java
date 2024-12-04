@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -19,17 +20,25 @@ public class SecurityConfig {
         http
         .authorizeHttpRequests(authorizeRequests ->
             authorizeRequests
-            .requestMatchers("/saved-workouts","/favicon.ico","/css/**", "/images/**", "/js/**","/register","/home","/error/**", "/login","/logout").permitAll()  // Permite acceso sin autenticación
-            .requestMatchers("/workout/**","/new/**","/activities/**","/workoutlist/**","/calendar/**","/cycle/**").hasAnyRole(  "PREMIUM","BASIC") 
+            .requestMatchers("/favicon.ico","/css/**", "/images/**", "/js/**","/register","/home","/error/**", "/login","/logout").permitAll()  // Permite acceso sin autenticaciÃ³n
+            .requestMatchers("/foodmacros/**","/workout/**","/new/**","/activities/**","/workoutlist/**","/calendar/**","/cycle/**").hasAnyRole(  "PREMIUM","BASIC") 
             .requestMatchers("/editPeriodData/**","/deletePeriodData/**", "/periodPhases","/periodForm", "/submitPeriodForm","/submitPeriodData").hasRole("PREMIUM")  // Only accessible by users with role PREMIUM
            )
            .formLogin(form -> form
            .loginPage("/login").permitAll()
            
            .defaultSuccessUrl("/home", true)  // Redirect to /home after successful login
-       )        .logout(withDefaults())  // Configura el logout si lo necesitas
-       .csrf(withDefaults()); 
-    return http.build();
+       )    
+       
+       .logout(logout -> logout
+            .logoutUrl("/logout")
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))  // Permitir logout por GET
+            .permitAll()
+        )
+        .csrf(withDefaults());
+
+        return http.build();
+  
 }
 
 @Bean
