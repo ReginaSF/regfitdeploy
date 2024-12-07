@@ -43,7 +43,7 @@ public class Exercise {
     @ManyToMany(mappedBy = "exercises")
     private List<Workout> workouts;
 
-    // Getters y setters para cada campo
+    
     public String getCategory() {
         return category;
     }

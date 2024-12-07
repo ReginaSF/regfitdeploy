@@ -91,7 +91,7 @@
             <form action="/workout" method="get" class="mb-4">
                 <div class="input-group">
                     <input type="text" class="form-control" id="primaryMuscle" name="primaryMuscle"
-                        placeholder="Enter muscle (chest, lats, hamstrings, glutes, shoulders, etc)">
+                        placeholder="Enter muscle (Glutes, lats, hamstrings, chest, shoulders, etc)">
                     <button type="submit" class="btn btn-primary">Search</button>
                 </div>
             </form>
@@ -147,8 +147,7 @@
     <!-- No exercises available message -->
     <div th:if="${#lists.isEmpty(exercises)}">
         <div class="container mt-5">
-            <p class="text-center">Muscle not found, you can try typing: chest, lats, hamstrings, glutes, shoulders,
-                etc.</p>
+            <p class="text-center">Muscle not found, you can try typing: Glutes, hamstrings, glutes, shoulders etc.</p>
         </div>
     </div>
 

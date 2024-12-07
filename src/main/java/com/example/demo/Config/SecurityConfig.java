@@ -1,5 +1,6 @@
 package com.example.demo.Config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -15,13 +16,17 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+ @Autowired
+  
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
         .authorizeHttpRequests(authorizeRequests ->
             authorizeRequests
-            .requestMatchers("/favicon.ico","/css/**", "/images/**", "/js/**","/register","/home","/error/**", "/login","/logout").permitAll()  // Permite acceso sin autenticaciÃ³n
-            .requestMatchers("/foodmacros/**","/workout/**","/new/**","/activities/**","/workoutlist/**","/calendar/**","/cycle/**").hasAnyRole(  "PREMIUM","BASIC") 
+            .requestMatchers("/favicon.ico","/css/**", "/images/**", "/js/**","/register","/home","/error/**", "/login","/logout").permitAll()  
+            .requestMatchers("/foodmacros/**","/access-denied/**","/workout/**","/new/**","/activities/**","/workoutlist/**","/calendar/**","/cycle/**").hasAnyRole(  "PREMIUM","BASIC") 
             .requestMatchers("/editPeriodData/**","/deletePeriodData/**", "/periodPhases","/periodForm", "/submitPeriodForm","/submitPeriodData").hasRole("PREMIUM")  // Only accessible by users with role PREMIUM
            )
            .formLogin(form -> form
@@ -32,9 +37,13 @@ public class SecurityConfig {
        
        .logout(logout -> logout
             .logoutUrl("/logout")
-            .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))  // Permitir logout por GET
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")) 
             .permitAll()
         )
+   
+        .exceptionHandling()
+    .accessDeniedPage("/access-denied")  // Set custom access-denied page
+.and()
         .csrf(withDefaults());
 
         return http.build();

@@ -77,10 +77,8 @@ public class ExerciseController {
         // Fetch the user from the database by email (assuming Principal contains the email)
 AppUsers user = userRepository.findByEmail(username);  // `username` here is the user's email
 if (user == null) {
-    return "error-page";  // Handle if user not found
+    return "errorPage";  // Handle if user not found
 }
-
-        // Create a new workout for this user with the selected exercise
 
         // Redirect to the workout list page (or any other page)
         return "redirect:/workoutlist";

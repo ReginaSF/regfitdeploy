@@ -27,26 +27,27 @@ public class PeriodDataController {
     private AppUserRepository appUserRepository;
 
     @Autowired
-    private PeriodDataService periodDataService; 
-
+    private PeriodDataService periodDataService;
     @GetMapping("/periodForm")
     public String showPeriodForm(Model model) {
         // Get the authenticated user's details
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();  // This is Spring's UserDetails
-
+    
         String email = userDetails.getUsername();
-        AppUsers appUser = appUserRepository.findByEmail(email);  // Fetching AppUsers entity
-
+        AppUsers appUser = appUserRepository.findByEmail(email);  // Fetching AppUser entity
+    
         if (appUser == null) {
             throw new RuntimeException("User not found");
         }
-
+    
         // Create a new PeriodData object and set the AppUser
         PeriodData periodData = new PeriodData();
         periodData.setUser(appUser);  // Associate the PeriodData with the AppUser
-
+    
         model.addAttribute("periodData", periodData);
+    
+        // No need to manually check for "ROLE_BASIC" here, Spring Security is already handling it.
         return "periodForm";  // Return the view name
     }
 
@@ -70,30 +71,30 @@ public class PeriodDataController {
         // Redirect to a summary after saving the data
         return "redirect:/periodPhases";
     }
+
     @GetMapping("/periodPhases")
     public String showPeriodPhases(Model model) {
         // Get the authenticated user's details
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-    
+
         // Use the email to fetch the actual AppUsers entity
         String email = userDetails.getUsername();
         AppUsers appUser = appUserRepository.findByEmail(email);
-    
+
         if (appUser == null) {
             throw new RuntimeException("User not found");
         }
-    
+
         // Fetch the latest PeriodData for the user
         PeriodData periodData = periodDataRepository.findTopByUserOrderByPeriodIdDesc(appUser);
-    
+
         // Add the PeriodData object to the model
         model.addAttribute("periodData", periodData);
-    
+
         return "periodPhases"; // shows periodPhases view
     }
 
-   
     @GetMapping("/editPeriodData/{id}")  // Edit a record on the periods list
     public String editPeriodData(@PathVariable("id") Long id, Model model) {
 
