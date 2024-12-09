@@ -30,25 +30,25 @@ public class MenstrualCycleService {
 
         // Prepare the API request body
         JSONObject body = new JSONObject();
-        body.put("current_date", menstrualCycle.getCycleStartDate().toString()); // Replace with actual fields
-        body.put("past_cycle_data", new JSONObject[] {
-                new JSONObject().put("cycle_start_date", menstrualCycle.getCycleStartDate().toString())
-                                 .put("period_length", menstrualCycle.getPeriodLength())
+        body.put("current_date", menstrualCycle.getCycleStartDate().toString()); 
+        body.put("past_cycle_data", new JSONObject[]{
+            new JSONObject().put("cycle_start_date", menstrualCycle.getCycleStartDate().toString())
+            .put("period_length", menstrualCycle.getPeriodLength())
         });
-        body.put("max_cycle_predictions", 1); // Or whatever value you want to send
+        body.put("max_cycle_predictions", 1); 
 
         try {
             // Make the API call
             HttpResponse<String> response = Unirest.post("https://womens-health-menstrual-cycle-phase-predictions-insights.p.rapidapi.com/process_cycle_data")
-                .header("x-rapidapi-key", "c82fa910bemsh5ede39737835b07p1bf816jsn52a57457493b")  // Your actual API key
-                .header("x-rapidapi-host", "womens-health-menstrual-cycle-phase-predictions-insights.p.rapidapi.com")
-                .header("Content-Type", "application/json")
-                .body(body.toString())
-                .asString();
+                    .header("x-rapidapi-key", "c82fa910bemsh5ede39737835b07p1bf816jsn52a57457493b") // Your actual API key
+                    .header("x-rapidapi-host", "womens-health-menstrual-cycle-phase-predictions-insights.p.rapidapi.com")
+                    .header("Content-Type", "application/json")
+                    .body(body.toString())
+                    .asString();
 
             // Log or handle the response from the API
             if (response.getStatus() == 200) {
-                // Optionally, process the response and update the saved cycle with any new data
+                // Process the response and update the saved cycle with any new data
                 System.out.println("API Response: " + response.getBody());
             } else {
                 System.out.println("API Error: " + response.getStatus() + " - " + response.getBody());
@@ -61,7 +61,7 @@ public class MenstrualCycleService {
         return savedCycle;
     }
 
-    // Get all menstrual cycles for a user
+    // Get all menstrual cycles per user
     public List<MenstrualCycle> getCyclesByUserId(Long userId) {
         return menstrualCycleRepository.findByUserId(userId);
     }

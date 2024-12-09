@@ -9,7 +9,7 @@ import kong.unirest.UnirestException;
 @Service
 public class ExerciseService {
 
-    // here i am implementing the call to the external api:
+    // Here i am implementing the call to the external api:
     private static final String API_URL = "https://exercise-db-fitness-workout-gym.p.rapidapi.com/exercises/muscle/";
     private static final String API_KEY = "c82fa910bemsh5ede39737835b07p1bf816jsn52a57457493b";
     private static final String API_HOST = "exercise-db-fitness-workout-gym.p.rapidapi.com";

@@ -26,7 +26,7 @@ public class SecurityConfig {
         .authorizeHttpRequests(authorizeRequests ->
             authorizeRequests
             .requestMatchers("/favicon.ico","/css/**", "/images/**", "/js/**","/register","/home","/error/**", "/login","/logout").permitAll()  
-            .requestMatchers("/foodmacros/**","/access-denied/**","/workout/**","/new/**","/activities/**","/workoutlist/**","/calendar/**","/cycle/**").hasAnyRole(  "PREMIUM","BASIC") 
+            .requestMatchers("/comingsoon/**","/foodmacros/**","/access-denied/**","/workout/**","/new/**","/activities/**","/workoutlist/**","/calendar/**","/cycle/**").hasAnyRole(  "PREMIUM","BASIC") 
             .requestMatchers("/editPeriodData/**","/deletePeriodData/**", "/periodPhases","/periodForm", "/submitPeriodForm","/submitPeriodData").hasRole("PREMIUM")  // Only accessible by users with role PREMIUM
            )
            .formLogin(form -> form

@@ -47,8 +47,7 @@ public class PeriodDataController {
     
         model.addAttribute("periodData", periodData);
     
-        // No need to manually check for "ROLE_BASIC" here, Spring Security is already handling it.
-        return "periodForm";  // Return the view name
+        return "periodForm";  
     }
 
     @PostMapping("/submitPeriodData")
@@ -137,7 +136,7 @@ public class PeriodDataController {
         PeriodData periodData = periodDataRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("PeriodData not found"));
 
-        // Ensure the period data belongs to the current user
+        // Checking the period data belongs to the current user
         if (!periodData.getUser().equals(appUser)) {
             throw new RuntimeException("Unauthorized access to this data");
         }

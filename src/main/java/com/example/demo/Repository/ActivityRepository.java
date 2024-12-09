@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.Entity.Activity;
 
 @Repository
-public interface ActivityRepository extends JpaRepository<Activity, Long>{
+
+public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
 }

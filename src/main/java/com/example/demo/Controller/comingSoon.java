@@ -3,16 +3,16 @@ package com.example.demo.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
+
 @Controller
-public class LoginController {
+public class comingSoon {
+    @GetMapping("/comingsoon")
+    public String comingSoon() {
 
- 
-    
-    @GetMapping("/login")
-    public String login() {
-     
-        return "login";
+
+        return "comingSoon";
     }
+    
 
-   
 }

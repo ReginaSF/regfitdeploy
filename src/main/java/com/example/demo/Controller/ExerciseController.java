@@ -33,7 +33,7 @@ public class ExerciseController {
     private WorkoutService workoutService;
 
     @Autowired
-    private AppUserRepository userRepository;  // Assuming this repository exists for user fetching
+    private AppUserRepository userRepository;  
 
     // Search exercises based on primary muscle group
     @GetMapping("/workout")

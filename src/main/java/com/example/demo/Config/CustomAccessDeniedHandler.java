@@ -1,10 +1,4 @@
-/*package com.example.demo.Config;
-
-
------this class was attempted to use when configuring the roles access,
- finally was succesfully implemented inserting the method directly in
- the securityConfig class-------
-
+package com.example.demo.Config;
 
 import java.io.IOException;
 
@@ -27,4 +21,3 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 }
 
 
-*/

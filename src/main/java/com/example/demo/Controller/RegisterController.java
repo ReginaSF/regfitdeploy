@@ -32,8 +32,6 @@ public class RegisterController {
         return "register";
     }
 
-
-
     @PostMapping("/register")
     public String registerUser(@Valid @ModelAttribute("registerDTO") RegisterDTO registerDTO, 
                                BindingResult result, Model model) {
@@ -60,8 +58,5 @@ public class RegisterController {
         return "register"; 
     }
     
-
-
-
 
 }

@@ -4,8 +4,6 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
-
 public class ActivityDTO {
 
 private Long id;

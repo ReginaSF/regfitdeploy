@@ -10,6 +10,6 @@ import com.example.demo.Entity.MenstrualCycle;
 @Repository
 public interface MenstrualCycleRepository extends JpaRepository<MenstrualCycle, Long> {
 
-    // query to fetch all cycles by user ID
+    // Fetching all cycles by user ID
     List<MenstrualCycle> findByUserId(Long userId);  
 }
